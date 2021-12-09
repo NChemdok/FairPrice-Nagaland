@@ -1,4 +1,4 @@
-# fairpricenagaland
+# FairPrice Nagaland
 
 ## Flutter & Firebase Project
 
