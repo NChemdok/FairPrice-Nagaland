@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1083480526224",
+    "project_id": "fairpricenagaland",
+    "storage_bucket": "fairpricenagaland.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083480526224:android:e8266a1abba6ac6b39f715",
+        "android_client_info": {
+          "package_name": "com.slowthy.fairpricenagaland"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083480526224-5vg766eaivm0a6g9auqipgi9ovb14jqr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.slowthy.fairpricenagaland",
+            "certificate_hash": "7fa98a192fa1ef90cb2b13695fc5ead8a0f2861b"
+          }
+        },
+        {
+          "client_id": "1083480526224-lcp757qelouc0dkci2sf0trbfnb4lb6h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuZl5WfICfIknxEqkw01F-opA85c8d_II"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083480526224-lcp757qelouc0dkci2sf0trbfnb4lb6h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
