@@ -23,8 +23,17 @@ class GetDataFirebase {
   late List<String> fuelPrice;
   late List<Timestamp> fuelTimeStamp;
 
-  late String busFare;
-  late String sumoFare;
+  //Emergency Services Data
+  late List<String> serviceName;
+  late List<String> serviceUrl;
+  late List<String> serviceNumber;
+  late List<Timestamp> serviceTimeStamp;
+
+  //Transport Data
+  late List<String> transportRoute;
+  late List<String> transportBus;
+  late List<String> transportSumo;
+  late List<Timestamp> transportTimeStamp;
 
   GetDataFirebase({required this.location});
 
@@ -48,8 +57,14 @@ class GetDataFirebase {
     fuelUrl = returnData[11];
     fuelPrice = returnData[12];
     fuelTimeStamp = returnData[13];
-    busFare = "400";
-    sumoFare = "900";
+    serviceName = returnData[14];
+    serviceUrl = returnData[15];
+    serviceNumber = returnData[16];
+    serviceTimeStamp = returnData[17];
+    transportRoute = returnData[18];
+    transportBus = returnData[19];
+    transportSumo = returnData[20];
+    transportTimeStamp = returnData[21];
   }
 
   Future<List<dynamic>> loadData(FirebaseFirestore databaseInstance) async {
@@ -72,6 +87,18 @@ class GetDataFirebase {
     List<String> fuelUrlDynamicData = [];
     List<String> fuelPriceDynamicData = [];
     List<Timestamp> fuelTimeStampDynamicData = [];
+
+    //Emergency Services Data
+    List<String> serviceNameDynamicData = [];
+    List<String> serviceUrlDynamicData = [];
+    List<String> serviceNumberDynamicData = [];
+    List<Timestamp> serviceTimeStampDynamicData = [];
+
+    //Transport Data
+    List<String> transportRouteDynamicData = [];
+    List<String> transportBusDynamicData = [];
+    List<String> transportSumoDynamicData = [];
+    List<Timestamp> transportTimeStampDynamicData = [];
 
     DocumentSnapshot districtInstance = await databaseInstance
         .collection("prices")
@@ -145,6 +172,48 @@ class GetDataFirebase {
       } on StateError catch (e) {
         print('No nested field exists!');
       }
+
+      try {
+        dynamic services = districtInstance.get(FieldPath(['Emergency'])).toList();
+
+        for (var service in services) {
+          var serviceList = service.entries.toList();
+          //Fetch Data
+          String _currentItem = serviceList[0].key;
+          String phoneNumber = service[_currentItem][0];
+          String imageUrl = service[_currentItem][1];
+          Timestamp timeStamp = service[_currentItem][2];
+
+          //Load Data to List
+          serviceNameDynamicData.add(serviceList[0].key);
+          serviceUrlDynamicData.add(imageUrl);
+          serviceNumberDynamicData.add(phoneNumber);
+          serviceTimeStampDynamicData.add(timeStamp);
+        }
+      } on StateError catch (e) {
+        print('No nested field exists!');
+      }
+
+      try {
+        dynamic transports = districtInstance.get(FieldPath(['Transport'])).toList();
+
+        for (var transport in transports) {
+          var transportList = transport.entries.toList();
+          //Fetch Data
+          String _currentItem = transportList[0].key;
+          String sumoFare = transport[_currentItem][0];
+          String busFare = transport[_currentItem][1];
+          Timestamp timeStamp = transport[_currentItem][2];
+
+          //Load Data to List
+          transportRouteDynamicData.add(transportList[0].key);
+          transportBusDynamicData.add(busFare);
+          transportSumoDynamicData.add(sumoFare);
+          transportTimeStampDynamicData.add(timeStamp);
+        }
+      } on StateError catch (e) {
+        print('No nested field exists!');
+      }
     }
 
     return [
@@ -167,6 +236,18 @@ class GetDataFirebase {
       fuelUrlDynamicData,
       fuelPriceDynamicData,
       fuelTimeStampDynamicData,
+
+      //Emergency Services Data
+      serviceNameDynamicData,
+      serviceUrlDynamicData,
+      serviceNumberDynamicData,
+      serviceTimeStampDynamicData,
+
+      //Transport Data
+      transportRouteDynamicData,
+      transportBusDynamicData,
+      transportSumoDynamicData,
+      transportTimeStampDynamicData,
     ];
   }
 }

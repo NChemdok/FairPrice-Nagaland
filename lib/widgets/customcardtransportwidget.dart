@@ -1,20 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fairpricenagaland/widgets/nodatafoundwidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomCardTransportWidget extends StatelessWidget {
   const CustomCardTransportWidget(
       {Key? key,
-        required this.productNames,
-        required this.data,
+        required this.transportRoute,
+        required this.transportBus,
+        required this.transportSumo,
         required this.dateUpdated})
       : super(key: key);
 
-  final List<String> productNames;
-  final Map data;
-  final List<String> dateUpdated;
+  final List<String> transportRoute;
+  final List<String> transportBus;
+  final List<String> transportSumo;
+  final List<Timestamp> dateUpdated;
 
   @override
   Widget build(BuildContext context) {
+    if (transportRoute.isEmpty) {
+      return NoDataFoundWidget();
+    }
     return Container(
         color: Colors.black12,
         child: Column(
@@ -23,7 +30,7 @@ class CustomCardTransportWidget extends StatelessWidget {
               child: Container(
                 margin: EdgeInsets.fromLTRB(5, 5, 5,0),
                 child: ListView.builder(
-                  itemCount: productNames.length,
+                  itemCount: transportRoute.length,
                   itemExtent: 120,
                   itemBuilder: (context, index) {
                     return Card(
@@ -39,7 +46,7 @@ class CustomCardTransportWidget extends StatelessWidget {
                                 Container(
                                   width: double.infinity,
                                   child: Text(
-                                    ' ${productNames[index]}',
+                                    ' ${transportRoute[index]}',
                                     style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
@@ -52,7 +59,7 @@ class CustomCardTransportWidget extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 5.0),
                                   width: double.infinity,
                                   child: Text(
-                                    "Prices Updated on: ${dateUpdated[index]}",
+                                    "Prices Updated on: ${formatTimeStamp(dateUpdated[index])}",
                                     style: TextStyle(
                                       color: Colors.redAccent,
                                       fontWeight: FontWeight.normal,
@@ -77,7 +84,7 @@ class CustomCardTransportWidget extends StatelessWidget {
                                             child: Container(
                                                 alignment: Alignment.center,
                                                 child: Text(
-                                                  'Bus \n \u20B9 ${data['busFare']}',
+                                                  'Bus \n \u20B9 ${transportBus[index]}',
                                                   style: TextStyle(
                                                       color: Colors.red,
                                                       fontWeight:
@@ -97,7 +104,7 @@ class CustomCardTransportWidget extends StatelessWidget {
                                             child: Container(
                                               alignment: Alignment.center,
                                               child: Text(
-                                                'Sumo \n \u20B9 ${data['sumoFare']}',
+                                                'Sumo \n \u20B9 ${transportSumo[index]}',
                                                 style: TextStyle(
                                                     color: Colors.red,
                                                     fontWeight: FontWeight.normal),
@@ -120,5 +127,11 @@ class CustomCardTransportWidget extends StatelessWidget {
             )
           ],
         ));
+  }
+
+  formatTimeStamp(Timestamp dateUpdated) {
+    var date = dateUpdated.toDate();
+    var formattedDate = "${date.day}-${date.month}-${date.year}";
+    return formattedDate;
   }
 }

@@ -28,12 +28,18 @@ class _LoadingState extends State<Loading> {
       'fruitRetail': instance.fruitRetail,
       'fruitWholesale': instance.fruitWholesale,
       'fruitTimeStamp': instance.fruitTimeStamp,
-      'busFare': instance.busFare,
-      'sumoFare': instance.sumoFare,
       'fuelName': instance.fuelName,
       'fuelUrl': instance.fuelUrl,
       'fuelPrice': instance.fuelPrice,
       'fuelTimeStamp': instance.fuelTimeStamp,
+      'serviceName': instance.serviceName,
+      'serviceNumber': instance.serviceNumber,
+      'serviceUrl': instance.serviceUrl,
+      'serviceTimeStamp': instance.serviceTimeStamp,
+      'transportRoute': instance.transportRoute,
+      'transportBus': instance.transportBus,
+      'transportSumo': instance.transportSumo,
+      'transportTimeStamp': instance.transportTimeStamp,
     });
   }
 

@@ -12,47 +12,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Map data = {};
 
-  List<String> travelRouteNames = [
-    "Kohima - Dimapur",
-    "Kohima - Tuensang",
-    "Kohima - Phek",
-    "Kohima - Mokokchung",
-    "Kohima - Zunheboto",
-    "Kohima - Wokha",
-    "Kohima - Mon",
-  ];
-
-  List<String> otherNames = [];
-
-  List<String> fruitImages = [
-    "https://i.ibb.co/ZVL6JZt/apple-fruit-500x500.jpg",
-    "https://i.ibb.co/16Y9CKz/A-bunch-of-bananas-Clipping-path-included.jpg",
-    "https://i.ibb.co/6PSdSHZ/Cranberry.jpg",
-    "DragonFruit",
-    "Fig",
-    "Guava",
-    "Pineapple",
-    "Mango",
-    "Papaya",
-    "Kiwi",
-  ];
-
-  List<String> fuelNames = [
-    "Petrol",
-    "Diesel",
-    "Kerosene",
-    "LPG",
-    "CNG",
-  ];
-
-  List<String> fuelImages = [
-    "https://www.sunnewsonline.com/wp-content/uploads/2020/09/petrol.jpg",
-    "https://i2.wp.com/agfax.com/wp-content/uploads/gas-diesel-pump-DFiphone-1.jpg",
-    "Kerosene",
-    "LPG",
-    "CNG",
-  ];
-
   List<String> vegetableImages = [
     "https://i.ibb.co/FHQsCcb/Asparagus.jpg",
     "https://i.ibb.co/kcMLrRP/Beetroot.jpg",
@@ -66,19 +25,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     "https://i.ibb.co/zrnhmdD/Tomato.jpg",
   ];
 
-  List<String> dateUpdated = [
-    "10-06-2021",
-    "10-06-2021",
-    "10-06-2021",
-    "10-06-2021",
-    "10-06-2021",
-    "10-06-2021",
-    "10-06-2021",
-    "10-06-2021",
-    "10-06-2021",
-    "10-06-2021"
-  ];
-
   @override
   Widget build(BuildContext context) {
     data = data.isNotEmpty
@@ -89,7 +35,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        length: 7,
+        length: 6,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.redAccent,
@@ -132,19 +78,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 Tab(
                   child: Align(
                     alignment: Alignment.center,
-                    child: Text("Daily Wage"),
+                    child: Text("Emergency Numbers"),
                   ),
                 ),
                 Tab(
                   child: Align(
                     alignment: Alignment.center,
                     child: Text("Other Essentials"),
-                  ),
-                ),
-                Tab(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text("Emergency Numbers"),
                   ),
                 ),
               ],
@@ -184,6 +124,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         'fuelPrice': result['fuelPrice'],
                         'fuelUrl': result['fuelUrl'],
                         'fuelTimeStamp': result['fuelTimeStamp'],
+                        'serviceName': result['serviceName'],
+                        'serviceNumber': result['serviceNumber'],
+                        'serviceUrl': result['serviceUrl'],
+                        'serviceTimeStamp': result['serviceTimeStamp'],
+                        'transportRoute': result['transportRoute'],
+                        'transportBus': result['transportBus'],
+                        'transportSumo': result['transportSumo'],
+                        'transportTimeStamp': result['transportTimeStamp'],
                       };
                     });
                   },
@@ -221,26 +169,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   productPrice: data['fuelPrice'],
                   dateUpdated: data['fuelTimeStamp']),
               CustomCardTransportWidget(
-                  productNames: travelRouteNames,
-                  data: data,
-                  dateUpdated: dateUpdated),
-              CustomCardWidget(
-                  productNames: otherNames,
-                  productImages: vegetableImages,
-                  productRetail: data['vegetableRetail'],
-                  productWholesale: data['vegetableWholesale'],
-                  //data: data,
-                  dateUpdated: data['fruitTimeStamp']),
-              CustomCardWidget(
-                  productNames: otherNames,
-                  productImages: vegetableImages,
-                  productRetail: data['vegetableRetail'],
-                  productWholesale: data['vegetableWholesale'],
-                  dateUpdated: data['fruitTimeStamp']),
+                  transportRoute: data['transportRoute'],
+                  transportBus: data['transportBus'],
+                  transportSumo: data['transportSumo'],
+                  dateUpdated: data["transportTimeStamp"]),
               CustomCardEmergencyNumberWidget(
-                  serviceNames: otherNames,
-                  serviceImages: vegetableImages,
-                  serviceNumber: data['vegetableRetail'],
+                  serviceNames: data['serviceName'],
+                  serviceImages: data['serviceUrl'],
+                  serviceNumber: data['serviceNumber'],
+                  dateUpdated: data['serviceTimeStamp']),
+              CustomCardWidget(
+                  productNames: [],
+                  productImages: vegetableImages,
+                  productRetail: data['vegetableRetail'],
+                  productWholesale: data['vegetableWholesale'],
                   dateUpdated: data['fruitTimeStamp']),
             ],
           ), /**/

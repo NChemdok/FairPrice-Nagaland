@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fairpricenagaland/widgets/nodatafoundwidget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomCardEmergencyNumberWidget extends StatelessWidget {
   const CustomCardEmergencyNumberWidget(
       {Key? key,
-        required this.serviceNames,
-        required this.serviceImages,
-        required this.serviceNumber,
-        required this.dateUpdated})
+      required this.serviceNames,
+      required this.serviceImages,
+      required this.serviceNumber,
+      required this.dateUpdated})
       : super(key: key);
 
   final List<String> serviceNames;
@@ -27,7 +28,7 @@ class CustomCardEmergencyNumberWidget extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Container(
-                margin: EdgeInsets.fromLTRB(5, 5, 5,0),
+                margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
                 child: ListView.builder(
                   itemCount: serviceNames.length,
                   itemExtent: 130,
@@ -41,28 +42,29 @@ class CustomCardEmergencyNumberWidget extends StatelessWidget {
                           child: Row(children: <Widget>[
                             Container(
                                 child: Expanded(
-                                  flex: 6,
-                                  child: Card(
-                                    elevation: 10,
-                                    margin: const EdgeInsets.all(5.0),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(5.0),
-                                      child: FadeInImage(
-                                        height: 200,
-                                        width: 200,
-                                        placeholder: AssetImage(
-                                            'assets/images/utility/transparentLoader.gif'),
-                                        image: NetworkImage(serviceImages[index]),
-                                        imageErrorBuilder:  (context, error, stackTrace) {
-                                          return Image.asset(
-                                              'assets/images/utility/noimagefound.png',
-                                              fit: BoxFit.fill);
-                                        },
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
+                              flex: 6,
+                              child: Card(
+                                elevation: 10,
+                                margin: const EdgeInsets.all(5.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  child: FadeInImage(
+                                    height: 200,
+                                    width: 200,
+                                    placeholder: AssetImage(
+                                        'assets/images/utility/transparentLoader.gif'),
+                                    image: NetworkImage(serviceImages[index]),
+                                    imageErrorBuilder:
+                                        (context, error, stackTrace) {
+                                      return Image.asset(
+                                          'assets/images/utility/noimagefound.png',
+                                          fit: BoxFit.fill);
+                                    },
+                                    fit: BoxFit.fill,
                                   ),
-                                )),
+                                ),
+                              ),
+                            )),
                             Expanded(
                               flex: 14,
                               child: Column(children: <Widget>[
@@ -93,10 +95,11 @@ class CustomCardEmergencyNumberWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  margin: const EdgeInsets.only(top: 10.0, bottom: 5.0),
+                                  margin: const EdgeInsets.only(
+                                      top: 10.0, bottom: 5.0),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                        MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
                                       Container(
                                         height: 50,
@@ -112,9 +115,40 @@ class CustomCardEmergencyNumberWidget extends StatelessWidget {
                                                   style: TextStyle(
                                                       color: Colors.red,
                                                       fontWeight:
-                                                      FontWeight.normal),
+                                                          FontWeight.normal),
                                                   textAlign: TextAlign.center,
                                                 )),
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        height: 40,
+                                        width: 90,
+                                        child: ElevatedButton.icon(
+                                          style: ElevatedButton.styleFrom(
+                                            elevation: 10,
+                                            primary: Colors.red, // background
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  new BorderRadius.circular(
+                                                      5),
+                                            ), // foreground
+                                          ),
+                                          onPressed: () {
+                                            launch(
+                                                "tel:+91${serviceNumber[index].trim()}");
+                                          },
+                                          icon: Icon(Icons.phone,
+                                              color: Colors.white),
+                                          label: Container(
+                                            child: Text(
+                                              "Call",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontWeight:
+                                                      FontWeight.normal),
+                                              textAlign: TextAlign.center,
+                                            ),
                                           ),
                                         ),
                                       ),
