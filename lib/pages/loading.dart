@@ -30,8 +30,10 @@ class _LoadingState extends State<Loading> {
       'fruitTimeStamp': instance.fruitTimeStamp,
       'busFare': instance.busFare,
       'sumoFare': instance.sumoFare,
+      'fuelName': instance.fuelName,
+      'fuelUrl': instance.fuelUrl,
       'fuelPrice': instance.fuelPrice,
-
+      'fuelTimeStamp': instance.fuelTimeStamp,
     });
   }
 

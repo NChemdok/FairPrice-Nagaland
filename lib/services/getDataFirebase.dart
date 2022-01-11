@@ -17,9 +17,14 @@ class GetDataFirebase {
   late List<String> fruitWholesale;
   late List<Timestamp> fruitTimeStamp;
 
+  //Fuel Data
+  late List<String> fuelName;
+  late List<String> fuelUrl;
+  late List<String> fuelPrice;
+  late List<Timestamp> fuelTimeStamp;
+
   late String busFare;
   late String sumoFare;
-  late String fuelPrice;
 
   GetDataFirebase({required this.location});
 
@@ -39,9 +44,12 @@ class GetDataFirebase {
     fruitRetail = returnData[7];
     fruitWholesale = returnData[8];
     fruitTimeStamp = returnData[9];
+    fuelName = returnData[10];
+    fuelUrl = returnData[11];
+    fuelPrice = returnData[12];
+    fuelTimeStamp = returnData[13];
     busFare = "400";
     sumoFare = "900";
-    fuelPrice = "300";
   }
 
   Future<List<dynamic>> loadData(FirebaseFirestore databaseInstance) async {
@@ -58,6 +66,12 @@ class GetDataFirebase {
     List<String> fruitRetailDynamicData = [];
     List<String> fruitWholesaleDynamicData = [];
     List<Timestamp> fruitTimeStampDynamicData = [];
+
+    //Fuel Data
+    List<String> fuelNameDynamicData = [];
+    List<String> fuelUrlDynamicData = [];
+    List<String> fuelPriceDynamicData = [];
+    List<Timestamp> fuelTimeStampDynamicData = [];
 
     DocumentSnapshot districtInstance = await databaseInstance
         .collection("prices")
@@ -110,50 +124,28 @@ class GetDataFirebase {
       } on StateError catch (e) {
         print('No nested field exists!');
       }
-    }
 
-//    querySnapshot.forEach((doc) {
-//
-//      print('$location');
-//      print(doc.data());
-//
-//      doc['Fruits'].forEach((fruit) {
-//        var fruitList = fruit.entries.toList();
-//
-//        //Fetch Data
-//        String _currentItem = fruitList[0].key;
-//        String retail = fruit[_currentItem][0];
-//        String wholesale = fruit[_currentItem][1];
-//        String imageUrl = fruit[_currentItem][2];
-//        Timestamp timeStamp = fruit[_currentItem][3];
-//
-//        //Load Data to List
-//        fruitNameDynamicData.add(fruitList[0].key);
-//        fruitUrlDynamicData.add(imageUrl);
-//        fruitRetailDynamicData.add(retail);
-//        fruitWholesaleDynamicData.add(wholesale);
-//        fruitTimeStampDynamicData.add(timeStamp);
-//        //print("$_currentItem : Retail = $retail : Wholesale = $wholesale");
-//      });
-//
-//      doc['Vegetables'].forEach((vegetable) {
-//        var vegetableList = vegetable.entries.toList();
-//        //Fetch Data
-//        String _currentItem = vegetableList[0].key;
-//        String retail = vegetable[_currentItem][0];
-//        String wholesale = vegetable[_currentItem][1];
-//        String imageUrl = vegetable[_currentItem][2];
-//        Timestamp timeStamp = vegetable[_currentItem][3];
-//
-//        //Load Data to List
-//        vegetableNameDynamicData.add(vegetableList[0].key);
-//        vegetableUrlDynamicData.add(imageUrl);
-//        vegetableRetailDynamicData.add(retail);
-//        vegetableWholesaleDynamicData.add(wholesale);
-//        vegetableTimeStampDynamicData.add(timeStamp);
-//        //print("$_currentItem : Retail = $retail : Wholesale = $wholesale");
-//      });
-//    });
+      try {
+        dynamic fuels = districtInstance.get(FieldPath(['Fuel'])).toList();
+
+        for (var fuel in fuels) {
+          var fuelList = fuel.entries.toList();
+          //Fetch Data
+          String _currentItem = fuelList[0].key;
+          String price = fuel[_currentItem][0];
+          String imageUrl = fuel[_currentItem][1];
+          Timestamp timeStamp = fuel[_currentItem][2];
+
+          //Load Data to List
+          fuelNameDynamicData.add(fuelList[0].key);
+          fuelUrlDynamicData.add(imageUrl);
+          fuelPriceDynamicData.add(price);
+          fuelTimeStampDynamicData.add(timeStamp);
+        }
+      } on StateError catch (e) {
+        print('No nested field exists!');
+      }
+    }
 
     return [
       //Vegetable Data
@@ -169,6 +161,12 @@ class GetDataFirebase {
       fruitRetailDynamicData,
       fruitWholesaleDynamicData,
       fruitTimeStampDynamicData,
+
+      //Fuel Data
+      fuelNameDynamicData,
+      fuelUrlDynamicData,
+      fuelPriceDynamicData,
+      fuelTimeStampDynamicData,
     ];
   }
 }

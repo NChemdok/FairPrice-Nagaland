@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fairpricenagaland/widgets/customcardwidget.dart';
 import 'package:fairpricenagaland/widgets/customcardtransportwidget.dart';
 import 'package:fairpricenagaland/widgets/customcardfuelwidget.dart';
+import 'package:fairpricenagaland/widgets/customcardemergencynumberswidget.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -88,7 +89,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        length: 6,
+        length: 7,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.redAccent,
@@ -140,6 +141,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     child: Text("Other Essentials"),
                   ),
                 ),
+                Tab(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text("Emergency Numbers"),
+                  ),
+                ),
               ],
             ),
             title: const Text('FairPrice Nagaland'),
@@ -173,7 +180,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         'fruitTimeStamp': result['fruitTimeStamp'],
                         'busFare': result['busFare'],
                         'sumoFare': result['sumoFare'],
+                        'fuelName': result['fuelName'],
                         'fuelPrice': result['fuelPrice'],
+                        'fuelUrl': result['fuelUrl'],
+                        'fuelTimeStamp': result['fuelTimeStamp'],
                       };
                     });
                   },
@@ -204,11 +214,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   productRetail: data['fruitRetail'],
                   productWholesale: data['fruitWholesale'],
                   dateUpdated: data['fruitTimeStamp']),
+
               CustomCardFuelWidget(
-                  productNames: fuelNames,
-                  productImages: fuelImages,
-                  data: data,
-                  dateUpdated: dateUpdated),
+                  productNames: data['fuelName'],
+                  productImages: data['fuelUrl'],
+                  productPrice: data['fuelPrice'],
+                  dateUpdated: data['fuelTimeStamp']),
               CustomCardTransportWidget(
                   productNames: travelRouteNames,
                   data: data,
@@ -225,7 +236,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   productImages: vegetableImages,
                   productRetail: data['vegetableRetail'],
                   productWholesale: data['vegetableWholesale'],
-                  //data: data,
+                  dateUpdated: data['fruitTimeStamp']),
+              CustomCardEmergencyNumberWidget(
+                  serviceNames: otherNames,
+                  serviceImages: vegetableImages,
+                  serviceNumber: data['vegetableRetail'],
                   dateUpdated: data['fruitTimeStamp']),
             ],
           ), /**/

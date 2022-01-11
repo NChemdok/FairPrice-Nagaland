@@ -42,7 +42,10 @@ class _ChooseLocationState extends State<ChooseLocation> {
       'fruitTimeStamp': instance.fruitTimeStamp,
       'busFare': instance.busFare,
       'sumoFare': instance.sumoFare,
+      'fuelName': instance.fuelName,
       'fuelPrice': instance.fuelPrice,
+      'fuelUrl': instance.fuelUrl,
+      'fuelTimeStamp': instance.fuelTimeStamp,
     });
   }
 

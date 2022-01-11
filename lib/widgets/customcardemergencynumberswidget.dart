@@ -2,23 +2,23 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fairpricenagaland/widgets/nodatafoundwidget.dart';
 
-class CustomCardFuelWidget extends StatelessWidget {
-  const CustomCardFuelWidget(
+class CustomCardEmergencyNumberWidget extends StatelessWidget {
+  const CustomCardEmergencyNumberWidget(
       {Key? key,
-        required this.productNames,
-        required this.productImages,
-        required this.productPrice,
+        required this.serviceNames,
+        required this.serviceImages,
+        required this.serviceNumber,
         required this.dateUpdated})
       : super(key: key);
 
-  final List<String> productNames;
-  final List<String> productImages;
-  final List<String> productPrice;
+  final List<String> serviceNames;
+  final List<String> serviceImages;
+  final List<String> serviceNumber;
   final List<Timestamp> dateUpdated;
 
   @override
   Widget build(BuildContext context) {
-    if (productNames.isEmpty) {
+    if (serviceNames.isEmpty) {
       return NoDataFoundWidget();
     }
     return Container(
@@ -29,7 +29,7 @@ class CustomCardFuelWidget extends StatelessWidget {
               child: Container(
                 margin: EdgeInsets.fromLTRB(5, 5, 5,0),
                 child: ListView.builder(
-                  itemCount: productNames.length,
+                  itemCount: serviceNames.length,
                   itemExtent: 130,
                   itemBuilder: (context, index) {
                     return Card(
@@ -52,7 +52,7 @@ class CustomCardFuelWidget extends StatelessWidget {
                                         width: 200,
                                         placeholder: AssetImage(
                                             'assets/images/utility/transparentLoader.gif'),
-                                        image: NetworkImage(productImages[index]),
+                                        image: NetworkImage(serviceImages[index]),
                                         imageErrorBuilder:  (context, error, stackTrace) {
                                           return Image.asset(
                                               'assets/images/utility/noimagefound.png',
@@ -70,7 +70,7 @@ class CustomCardFuelWidget extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 5.0),
                                   width: double.infinity,
                                   child: Text(
-                                    '${productNames[index]}',
+                                    '${serviceNames[index]}',
                                     style: TextStyle(
                                       color: Colors.red,
                                       fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class CustomCardFuelWidget extends StatelessWidget {
                                   padding: const EdgeInsets.only(top: 5.0),
                                   width: double.infinity,
                                   child: Text(
-                                    "Prices Updated on: ${formatTimeStamp(dateUpdated[index])}",
+                                    "Number Updated on: ${formatTimeStamp(dateUpdated[index])}",
                                     style: TextStyle(
                                       color: Colors.redAccent,
                                       fontWeight: FontWeight.normal,
@@ -108,7 +108,7 @@ class CustomCardFuelWidget extends StatelessWidget {
                                             child: Container(
                                                 alignment: Alignment.center,
                                                 child: Text(
-                                                  '\u20B9 ${productPrice[index]} / Litre',
+                                                  '+91 ${serviceNumber[index]}',
                                                   style: TextStyle(
                                                       color: Colors.red,
                                                       fontWeight:
