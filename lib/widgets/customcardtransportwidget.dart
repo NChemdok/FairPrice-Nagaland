@@ -48,7 +48,7 @@ class CustomCardTransportWidget extends StatelessWidget {
                                   child: Text(
                                     ' ${transportRoute[index]}',
                                     style: TextStyle(
-                                      color: Colors.red,
+                                      color: Colors.black54,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
                                     ),
@@ -61,7 +61,7 @@ class CustomCardTransportWidget extends StatelessWidget {
                                   child: Text(
                                     "Prices Updated on: ${formatTimeStamp(dateUpdated[index])}",
                                     style: TextStyle(
-                                      color: Colors.redAccent,
+                                      color: Colors.grey,
                                       fontWeight: FontWeight.normal,
                                       fontSize: 10,
                                     ),
@@ -86,7 +86,7 @@ class CustomCardTransportWidget extends StatelessWidget {
                                                 child: Text(
                                                   'Bus \n \u20B9 ${transportBus[index]}',
                                                   style: TextStyle(
-                                                      color: Colors.red,
+                                                      color: Colors.grey,
                                                       fontWeight:
                                                       FontWeight.normal),
                                                   textAlign: TextAlign.center,
@@ -106,7 +106,7 @@ class CustomCardTransportWidget extends StatelessWidget {
                                               child: Text(
                                                 'Sumo \n \u20B9 ${transportSumo[index]}',
                                                 style: TextStyle(
-                                                    color: Colors.red,
+                                                    color: Colors.grey,
                                                     fontWeight: FontWeight.normal),
                                                 textAlign: TextAlign.center,
                                               ),

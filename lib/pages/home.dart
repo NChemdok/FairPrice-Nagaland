@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fairpricenagaland/widgets/customcardwidget.dart';
 import 'package:fairpricenagaland/widgets/customcardtransportwidget.dart';
 import 'package:fairpricenagaland/widgets/customcardfuelwidget.dart';
-import 'package:fairpricenagaland/widgets/customcardemergencynumberswidget.dart';
+import 'package:fairpricenagaland/widgets/customcardessentialwidget.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -35,14 +35,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        length: 6,
+        length: 5,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.redAccent,
-            elevation: 0,
+            backgroundColor: Colors.red[500],
+            elevation: 5,
             bottom: const TabBar(
               isScrollable: true,
-              labelColor: Colors.red,
+              labelColor: Colors.redAccent,
               unselectedLabelColor: Colors.white,
               indicatorSize: TabBarIndicatorSize.tab,
               indicator: BoxDecoration(
@@ -75,12 +75,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     child: Text("Transport"),
                   ),
                 ),
-                Tab(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text("Emergency Numbers"),
-                  ),
-                ),
+//                Tab(
+//                  child: Align(
+//                    alignment: Alignment.center,
+//                    child: Text("Emergency Numbers"),
+//                  ),
+//                ),
                 Tab(
                   child: Align(
                     alignment: Alignment.center,
@@ -95,8 +95,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 margin: const EdgeInsets.all(10.0),
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.redAccent, // background
-                    onPrimary: Colors.red,
+                    primary: Colors.red, // background
+                    onPrimary: Colors.transparent,
                     elevation: 10,
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(30.0),
@@ -132,6 +132,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         'transportBus': result['transportBus'],
                         'transportSumo': result['transportSumo'],
                         'transportTimeStamp': result['transportTimeStamp'],
+                        'essentialName': result['essentialName'],
+                        'essentialPrice': result['essentialPrice'],
+                        'essentialUrl': result['essentialUrl'],
+                        'essentialTimeStamp': result['essentialTimeStamp'],
                       };
                     });
                   },
@@ -173,17 +177,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   transportBus: data['transportBus'],
                   transportSumo: data['transportSumo'],
                   dateUpdated: data["transportTimeStamp"]),
-              CustomCardEmergencyNumberWidget(
-                  serviceNames: data['serviceName'],
-                  serviceImages: data['serviceUrl'],
-                  serviceNumber: data['serviceNumber'],
-                  dateUpdated: data['serviceTimeStamp']),
-              CustomCardWidget(
-                  productNames: [],
-                  productImages: vegetableImages,
-                  productRetail: data['vegetableRetail'],
-                  productWholesale: data['vegetableWholesale'],
-                  dateUpdated: data['fruitTimeStamp']),
+//              CustomCardEmergencyNumberWidget(
+//                  serviceNames: data['serviceName'],
+//                  serviceImages: data['serviceUrl'],
+//                  serviceNumber: data['serviceNumber'],
+//                  dateUpdated: data['serviceTimeStamp']),
+              CustomCardEssentialWidget(
+                  productNames: data['essentialName'],
+                  productImages: data['essentialUrl'],
+                  productPrice: data['essentialPrice'],
+                  dateUpdated: data['essentialTimeStamp']),
             ],
           ), /**/
         ),

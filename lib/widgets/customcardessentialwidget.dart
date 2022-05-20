@@ -1,29 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fairpricenagaland/widgets/nodatafoundwidget.dart';
 
-class CustomCardWidget extends StatelessWidget {
-  const CustomCardWidget(
+class CustomCardEssentialWidget extends StatelessWidget {
+  const CustomCardEssentialWidget(
       {Key? key,
-      required this.productNames,
-      required this.productImages,
-      required this.productRetail,
-      required this.productWholesale,
-      //required this.data,
-      required this.dateUpdated})
+        required this.productNames,
+        required this.productImages,
+        required this.productPrice,
+        required this.dateUpdated})
       : super(key: key);
 
   final List<String> productNames;
   final List<String> productImages;
-  final List<String> productRetail;
-  final List<String> productWholesale;
-  //final Map data;
+  final List<String> productPrice;
   final List<Timestamp> dateUpdated;
 
   @override
   Widget build(BuildContext context) {
-    //print("Here Come the money : $productNames");
     if (productNames.isEmpty) {
       return NoDataFoundWidget();
     }
@@ -33,44 +27,42 @@ class CustomCardWidget extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Container(
-                margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+                margin: EdgeInsets.fromLTRB(5, 5, 5,0),
                 child: ListView.builder(
                   itemCount: productNames.length,
-                  itemExtent: 150,
+                  itemExtent: 130,
                   itemBuilder: (context, index) {
                     return Card(
                         elevation: 5,
-                        margin: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 10.0),
+                        margin: const EdgeInsets.fromLTRB(5.0, 5.0, 5.0, 5.0),
                         clipBehavior: Clip.antiAlias,
                         child: Container(
                           padding: const EdgeInsets.all(5.0),
                           child: Row(children: <Widget>[
                             Container(
                                 child: Expanded(
-                              flex: 6,
-                              child: Card(
-                                color: Colors.transparent,
-                                elevation: 10,
-                                margin: const EdgeInsets.all(5.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                  child: FadeInImage(
-                                    height: 200,
-                                    width: 200,
-                                    placeholder: AssetImage(
-                                        'assets/images/utility/transparentLoader.gif'),
-                                    image: NetworkImage(productImages[index]),
-                                    imageErrorBuilder:
-                                        (context, error, stackTrace) {
-                                      return Image.asset(
-                                          'assets/images/utility/noimagefound.png',
-                                          fit: BoxFit.fill);
-                                    },
-                                    fit: BoxFit.fill,
+                                  flex: 6,
+                                  child: Card(
+                                    elevation: 10,
+                                    margin: const EdgeInsets.all(5.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                      child: FadeInImage(
+                                        height: 200,
+                                        width: 200,
+                                        placeholder: AssetImage(
+                                            'assets/images/utility/transparentLoader.gif'),
+                                        image: NetworkImage(productImages[index]),
+                                        imageErrorBuilder:  (context, error, stackTrace) {
+                                          return Image.asset(
+                                              'assets/images/utility/noimagefound.png',
+                                              fit: BoxFit.fill);
+                                        },
+                                        fit: BoxFit.fill,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            )),
+                                )),
                             Expanded(
                               flex: 14,
                               child: Column(children: <Widget>[
@@ -101,14 +93,14 @@ class CustomCardWidget extends StatelessWidget {
                                   ),
                                 ),
                                 Container(
-                                  margin: const EdgeInsets.only(top: 20.0),
+                                  margin: const EdgeInsets.only(top: 10.0, bottom: 5.0),
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    MainAxisAlignment.spaceEvenly,
                                     children: <Widget>[
                                       Container(
                                         height: 50,
-                                        width: 100,
+                                        width: 150,
                                         child: Card(
                                           elevation: 10,
                                           clipBehavior: Clip.antiAlias,
@@ -116,34 +108,13 @@ class CustomCardWidget extends StatelessWidget {
                                             child: Container(
                                                 alignment: Alignment.center,
                                                 child: Text(
-                                                  'Retail / kg \n \u20B9 ${productRetail[index]}',
+                                                  '\u20B9 ${productPrice[index]} / kg',
                                                   style: TextStyle(
                                                       color: Colors.grey,
                                                       fontWeight:
-                                                          FontWeight.normal),
+                                                      FontWeight.normal),
                                                   textAlign: TextAlign.center,
                                                 )),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        child: Card(
-                                          elevation: 10,
-                                          clipBehavior: Clip.antiAlias,
-                                          child: Container(
-                                            height: 42,
-                                            width: 100,
-                                            child: Container(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                'Wholesale / kg \n \u20B9 ${productWholesale[index]}',
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontWeight:
-                                                        FontWeight.normal),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ),
                                           ),
                                         ),
                                       ),

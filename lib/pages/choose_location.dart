@@ -8,16 +8,19 @@ class ChooseLocation extends StatefulWidget {
 
 class _ChooseLocationState extends State<ChooseLocation> {
   List<String> locations = [
+    'Chumukedima',
     'Dimapur',
     'Kiphire',
     'Kohima',
     'Longleng',
     'Mokokchung',
     'Mon',
+    'Niuland',
     'Noklak',
     'Peren',
     'Phek',
     'Tuensang',
+    'Shamator',
     'Wokha',
     'Zunheboto',
   ];
@@ -52,7 +55,10 @@ class _ChooseLocationState extends State<ChooseLocation> {
       'transportBus': instance.transportBus,
       'transportSumo': instance.transportSumo,
       'transportTimeStamp': instance.transportTimeStamp,
-
+      'essentialName': instance.essentialName,
+      'essentialUrl': instance.essentialUrl,
+      'essentialPrice': instance.essentialPrice,
+      'essentialTimeStamp': instance.essentialTimeStamp,
     });
   }
 
@@ -61,7 +67,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.red,
         title: Text(
           'Choose Location',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -74,7 +80,7 @@ class _ChooseLocationState extends State<ChooseLocation> {
         childAspectRatio: 1.8,
         children: locations.map((value) {
           return Container(
-            margin: const EdgeInsets.fromLTRB(20, 15, 20, 10),
+            margin: const EdgeInsets.fromLTRB(20, 15, 10, 10),
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
@@ -87,13 +93,13 @@ class _ChooseLocationState extends State<ChooseLocation> {
               onPressed: () {
                 updateLocation(locations.indexOf(value));
               },
-              icon: Icon(Icons.location_city, color: Colors.red),
+              icon: Icon(Icons.location_city, color: Colors.black54),
               label: Container(
                 padding: const EdgeInsets.only(right: 10.0),
                 child: Text(
                   "${locations[locations.indexOf(value)]}",
                   style: TextStyle(
-                      color: Colors.red, fontWeight: FontWeight.normal),
+                      color: Colors.black54, fontWeight: FontWeight.normal),
                   textAlign: TextAlign.center,
                 ),
               ),

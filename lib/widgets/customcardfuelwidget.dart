@@ -72,7 +72,7 @@ class CustomCardFuelWidget extends StatelessWidget {
                                   child: Text(
                                     '${productNames[index]}',
                                     style: TextStyle(
-                                      color: Colors.red,
+                                      color: Colors.black54,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
                                     ),
@@ -85,7 +85,7 @@ class CustomCardFuelWidget extends StatelessWidget {
                                   child: Text(
                                     "Prices Updated on: ${formatTimeStamp(dateUpdated[index])}",
                                     style: TextStyle(
-                                      color: Colors.redAccent,
+                                      color: Colors.grey,
                                       fontWeight: FontWeight.normal,
                                       fontSize: 10,
                                     ),
@@ -110,7 +110,7 @@ class CustomCardFuelWidget extends StatelessWidget {
                                                 child: Text(
                                                   '\u20B9 ${productPrice[index]} / Litre',
                                                   style: TextStyle(
-                                                      color: Colors.red,
+                                                      color: Colors.grey,
                                                       fontWeight:
                                                       FontWeight.normal),
                                                   textAlign: TextAlign.center,

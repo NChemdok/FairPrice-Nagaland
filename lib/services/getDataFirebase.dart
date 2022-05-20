@@ -23,6 +23,12 @@ class GetDataFirebase {
   late List<String> fuelPrice;
   late List<Timestamp> fuelTimeStamp;
 
+  //Essential Data
+  late List<String> essentialName;
+  late List<String> essentialUrl;
+  late List<String> essentialPrice;
+  late List<Timestamp> essentialTimeStamp;
+
   //Emergency Services Data
   late List<String> serviceName;
   late List<String> serviceUrl;
@@ -65,6 +71,10 @@ class GetDataFirebase {
     transportBus = returnData[19];
     transportSumo = returnData[20];
     transportTimeStamp = returnData[21];
+    essentialName = returnData[22];
+    essentialUrl = returnData[23];
+    essentialPrice = returnData[24];
+    essentialTimeStamp = returnData[25];
   }
 
   Future<List<dynamic>> loadData(FirebaseFirestore databaseInstance) async {
@@ -99,6 +109,12 @@ class GetDataFirebase {
     List<String> transportBusDynamicData = [];
     List<String> transportSumoDynamicData = [];
     List<Timestamp> transportTimeStampDynamicData = [];
+
+    //Essential Data
+    List<String> essentialNameDynamicData = [];
+    List<String> essentialUrlDynamicData = [];
+    List<String> essentialPriceDynamicData = [];
+    List<Timestamp> essentialTimeStampDynamicData = [];
 
     DocumentSnapshot districtInstance = await databaseInstance
         .collection("prices")
@@ -214,6 +230,27 @@ class GetDataFirebase {
       } on StateError catch (e) {
         print('No nested field exists!');
       }
+
+      try {
+        dynamic essentials = districtInstance.get(FieldPath(['Essentials'])).toList();
+
+        for (var essential in essentials) {
+          var essentialList = essential.entries.toList();
+          //Fetch Data
+          String _currentItem = essentialList[0].key;
+          String price = essential[_currentItem][0];
+          String imageUrl = essential[_currentItem][1];
+          Timestamp timeStamp = essential[_currentItem][2];
+
+          //Load Data to List
+          essentialNameDynamicData.add(essentialList[0].key);
+          essentialUrlDynamicData.add(imageUrl);
+          essentialPriceDynamicData.add(price);
+          essentialTimeStampDynamicData.add(timeStamp);
+        }
+      } on StateError catch (e) {
+        print('No nested field exists!');
+      }
     }
 
     return [
@@ -248,6 +285,12 @@ class GetDataFirebase {
       transportBusDynamicData,
       transportSumoDynamicData,
       transportTimeStampDynamicData,
+
+      //Essential Data
+      essentialNameDynamicData,
+      essentialUrlDynamicData,
+      essentialPriceDynamicData,
+      essentialTimeStampDynamicData,
     ];
   }
 }

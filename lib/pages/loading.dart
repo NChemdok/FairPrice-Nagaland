@@ -40,6 +40,10 @@ class _LoadingState extends State<Loading> {
       'transportBus': instance.transportBus,
       'transportSumo': instance.transportSumo,
       'transportTimeStamp': instance.transportTimeStamp,
+      'essentialName': instance.essentialName,
+      'essentialUrl': instance.essentialUrl,
+      'essentialPrice': instance.essentialPrice,
+      'essentialTimeStamp': instance.essentialTimeStamp,
     });
   }
 
