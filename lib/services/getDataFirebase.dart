@@ -146,24 +146,24 @@ class GetDataFirebase {
       }
 
       try {
-      dynamic vegetables = districtInstance.get(FieldPath(['Vegetables'])).toList();
+        dynamic vegetables = districtInstance.get(FieldPath(['Vegetables'])).toList();
 
-      for (var vegetable in vegetables) {
-        var vegetableList = vegetable.entries.toList();
-        //Fetch Data
-        String _currentItem = vegetableList[0].key;
-        String retail = vegetable[_currentItem][0];
-        String wholesale = vegetable[_currentItem][1];
-        String imageUrl = vegetable[_currentItem][2];
-        Timestamp timeStamp = vegetable[_currentItem][3];
+        for (var vegetable in vegetables) {
+          var vegetableList = vegetable.entries.toList();
+          //Fetch Data
+          String _currentItem = vegetableList[0].key;
+          String retail = vegetable[_currentItem][0];
+          String wholesale = vegetable[_currentItem][1];
+          String imageUrl = vegetable[_currentItem][2];
+          Timestamp timeStamp = vegetable[_currentItem][3];
 
-        //Load Data to List
-        vegetableNameDynamicData.add(vegetableList[0].key);
-        vegetableUrlDynamicData.add(imageUrl);
-        vegetableRetailDynamicData.add(retail);
-        vegetableWholesaleDynamicData.add(wholesale);
-        vegetableTimeStampDynamicData.add(timeStamp);
-      }
+          //Load Data to List
+          vegetableNameDynamicData.add(vegetableList[0].key);
+          vegetableUrlDynamicData.add(imageUrl);
+          vegetableRetailDynamicData.add(retail);
+          vegetableWholesaleDynamicData.add(wholesale);
+          vegetableTimeStampDynamicData.add(timeStamp);
+        }
       } on StateError catch (e) {
         print('No nested field exists!');
       }

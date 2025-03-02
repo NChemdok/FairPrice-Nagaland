@@ -104,7 +104,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   ),
                   onPressed: () async {
                     dynamic result =
-                        await Navigator.pushNamed(context, '/location');
+                    await Navigator.pushNamed(context, '/location');
                     setState(() {
                       data = {
                         'location': result['location'],

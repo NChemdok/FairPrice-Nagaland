@@ -9,9 +9,7 @@ class Loading extends StatefulWidget {
 }
 
 class _LoadingState extends State<Loading> {
-
   void getData() async {
-
     GetDataFirebase instance = GetDataFirebase(location: "Kohima");
 
     await instance.getLocation();
@@ -51,8 +49,7 @@ class _LoadingState extends State<Loading> {
   void initState() {
     super.initState();
     Firebase.initializeApp().whenComplete(() {
-      setState(() {
-      });
+      setState(() {});
     });
     getData();
   }
